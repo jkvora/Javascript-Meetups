@@ -17,7 +17,7 @@ const validationText = 'Type Full text here or Press Tab to autocomplete';
 
 searchField = fieldType => {
   return function searchData(answers, input) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       var lstSearchItems = lstmeetups.map(item => {
         return item[fieldType] || '';
       });
@@ -39,7 +39,7 @@ publishMeetup = newMeetup => {
   lstmeetups.push(newMeetup);
   try {
     fs.writeFileSync(
-      __dirname + "/" + filePath,
+      __dirname + '/' + filePath,
       JSON.stringify(lstmeetups),
       'utf-8'
     );
@@ -47,7 +47,6 @@ publishMeetup = newMeetup => {
     generatemarkdown();
     status.message('Markdown Files generated.Please review and commit.');
     status.stop();
-
   } catch (err) {
     console.log(err);
   }
@@ -64,10 +63,8 @@ module.exports = {
           suggestOnly: true,
           source: searchField('name'),
           pageSize: 4,
-          validate: function (val) {
-            return val
-              ? true
-              : validationText;
+          validate: function(val) {
+            return val ? true : validationText;
           }
         },
         {
@@ -75,10 +72,8 @@ module.exports = {
           name: 'talk',
           message: 'Enter Title of Talk:',
           pageSize: 4,
-          validate: function (val) {
-            return val
-              ? true
-              : validationText;
+          validate: function(val) {
+            return val ? true : validationText;
           }
         },
         {
@@ -88,10 +83,8 @@ module.exports = {
           suggestOnly: true,
           source: searchField('resource'),
           pageSize: 4,
-          validate: function (val) {
-            return val
-              ? true
-              : validationText;
+          validate: function(val) {
+            return val ? true : validationText;
           }
         },
         {
@@ -109,10 +102,8 @@ module.exports = {
           suggestOnly: true,
           source: searchField('city'),
           pageSize: 4,
-          validate: function (val) {
-            return val
-              ? true
-              : validationText;
+          validate: function(val) {
+            return val ? true : validationText;
           }
         },
         {
@@ -122,14 +113,12 @@ module.exports = {
           suggestOnly: true,
           source: searchField('meetup'),
           pageSize: 4,
-          validate: function (val) {
-            return val
-              ? true
-              : validationText;
+          validate: function(val) {
+            return val ? true : validationText;
           }
         }
       ])
-      .then(function (newMeetup) {
+      .then(function(newMeetup) {
         console.log(chalk.green(JSON.stringify(newMeetup, null, 2)));
 
         inquirer
@@ -138,7 +127,7 @@ module.exports = {
             type: 'confirm',
             message: 'Publish it?'
           })
-          .then(function (answers) {
+          .then(function(answers) {
             if (answers.publish) {
               publishMeetup(newMeetup);
             } else {
