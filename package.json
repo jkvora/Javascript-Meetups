@@ -1,0 +1,36 @@
+{
+  "name": "meetup-talkies",
+  "version": "1.0.0",
+  "description": "A simple tool which is used  to display  details of the talks organized in javascript meetups.",
+  "main": "lib/generatemarkdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretty": "./node_modules/.bin/prettier --single-quote --write './**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+
+  "keywords": [
+    "Meetup",
+    "Javascript"
+  ],
+  "author": "Jalak Vora",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "figlet": "^1.2.0",
+    "husky": "^1.1.0",
+    "inquirer": "^6.2.0",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "json2md": "^1.6.1",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
+  }
+}
