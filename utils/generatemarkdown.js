@@ -1,8 +1,8 @@
 const json2md = require('json2md');
 var fs = require('fs');
-var allmeetups = require('./meetup.json');
+var allmeetups = require('./../db/meetup.json');
 
-run = () => {
+generateMarkdown = () => {
   var cities = [];
   for (i = 0; i < allmeetups.length; i++) {
     if (cities[allmeetups[i].city]) {
@@ -26,23 +26,21 @@ run = () => {
       }
     }
     finalSet[city] = meetups;
-    //cities[city]=meetups;
+    
   }
-
-  console.log(finalSet);
 
   generateFolders(finalSet);
 };
 
 generateFolders = lstMeetups => {
   for (let city in lstMeetups) {
-    makeDirectory('Meetup/' + city);
+    makeDirectory('meetups/' + city);
 
     for (let event in lstMeetups[city]) {
-      makeDirectory('Meetup/' + city + '/' + event);
-
+      makeDirectory('meetups/' + city + '/' + event);
+      let mdchunk = '';
       for (let k = 0; k < lstMeetups[city][event].length; k++) {
-        var mdchunk = json2md([
+        mdchunk = mdchunk + json2md([
           { h1: lstMeetups[city][event][k].talk },
           { blockquote: lstMeetups[city][event][k].name },
           {
@@ -52,19 +50,10 @@ generateFolders = lstMeetups => {
             ]
           }
         ]);
-        console.log(mdchunk);
-        fs.writeFileSync(
-          'Meetup/' +
-          city +
-          '/' +
-          event +
-          '/' +
-          lstMeetups[city][event][k].talk +
-          '.md',
-          mdchunk,
-          'utf-8'
-        );
+
+
       }
+      fs.writeFileSync('meetups/' + city + '/' + event + '/' + 'talks.md', mdchunk, 'utf-8');
     }
   }
 };
@@ -80,4 +69,4 @@ makeDirectory = path => {
   }
 };
 
-run();
+module.exports=generateMarkdown;

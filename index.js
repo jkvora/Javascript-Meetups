@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 
-const meetups = require('./lib/addtalks');
+const meetups = require('./utils/addtalks');
 
 clear();
 console.log(
