@@ -2,20 +2,19 @@
 
 > sad
 
+- Twitter:dsa
+- Resource :asd
 
- - Twitter:dsa
- - Resource :asd
 # Asynchronous Programming
 
 > Jalak
 
+- Twitter:asd
+- Resource :sd
 
- - Twitter:asd
- - Resource :sd
-# Node js  programming
+# Node js programming
 
 > Jalak
 
-
- - Twitter:asd
- - Resource :sd
+- Twitter:asd
+- Resource :sd

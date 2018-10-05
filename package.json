@@ -2,7 +2,7 @@
   "name": "meetup-talkies",
   "version": "1.0.0",
   "description": "A simple tool which is used  to display  details of the talks organized in javascript meetups.",
-  "main": "lib/generatemarkdown.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pretty": "./node_modules/.bin/prettier --single-quote --write './**/*.js'",

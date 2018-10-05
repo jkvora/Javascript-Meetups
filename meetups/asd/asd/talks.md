@@ -1,7 +1,13 @@
-# Synchronus programming 
+# Synchronus programming
 
 > Jalak
 
+- Twitter:asd
+- Resource :sd
 
- - Twitter:asd
- - Resource :sd
+#
+
+> Jalak
+
+- Twitter:asd
+- Resource :sd

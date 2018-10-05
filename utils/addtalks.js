@@ -45,8 +45,10 @@ publishMeetup = newMeetup => {
     );
     status.message('Creating markdown files....');
     generatemarkdown();
-    status.message('Markdown Files generated.Please review and commit.');
     status.stop();
+    console.log(
+      chalk.green('Markdown Files generated.Please review and commit.')
+    );
   } catch (err) {
     console.log(err);
   }
@@ -59,7 +61,7 @@ module.exports = {
         {
           type: 'autocomplete',
           name: 'name',
-          message: 'Enter Name:',
+          message: 'Your Name:',
           suggestOnly: true,
           source: searchField('name'),
           pageSize: 4,
@@ -70,7 +72,7 @@ module.exports = {
         {
           type: 'input',
           name: 'talk',
-          message: 'Enter Title of Talk:',
+          message: 'Title of Talk:',
           pageSize: 4,
           validate: function(val) {
             return val ? true : validationText;
@@ -79,7 +81,7 @@ module.exports = {
         {
           type: 'autocomplete',
           name: 'resource',
-          message: 'Enter Resource link (ppt,github link):',
+          message: 'Enter Resource link (ppt,github,youtube link):',
           suggestOnly: true,
           source: searchField('resource'),
           pageSize: 4,
@@ -90,7 +92,7 @@ module.exports = {
         {
           type: 'autocomplete',
           name: 'twitter',
-          message: 'Enter Twitter handle:',
+          message: 'Your twitter-handle:',
           suggestOnly: true,
           source: searchField('twitter'),
           pageSize: 4
@@ -98,7 +100,7 @@ module.exports = {
         {
           type: 'autocomplete',
           name: 'city',
-          message: 'Enter City:',
+          message: 'City:',
           suggestOnly: true,
           source: searchField('city'),
           pageSize: 4,
@@ -109,7 +111,7 @@ module.exports = {
         {
           type: 'autocomplete',
           name: 'meetup',
-          message: 'Enter Meetup Group:',
+          message: 'Meetup-Group:',
           suggestOnly: true,
           source: searchField('meetup'),
           pageSize: 4,
@@ -131,7 +133,7 @@ module.exports = {
             if (answers.publish) {
               publishMeetup(newMeetup);
             } else {
-              console.log('Do not publish');
+              console.log(chalk.red('Do not publish'));
             }
           });
       });
