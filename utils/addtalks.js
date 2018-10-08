@@ -18,17 +18,21 @@ const validationText = 'Type Full text here or Press Tab to autocomplete';
 searchField = fieldType => {
   return function searchData(answers, input) {
     return new Promise(function(resolve, reject) {
-      var lstSearchItems = lstmeetups.map(item => {
-        return item[fieldType] || '';
-      });
-
-      if (input) {
-        lstSearchItems = lstSearchItems.filter(item => {
-          return typeof item == 'string' && item.indexOf(input) != -1;
+      try {
+        var lstSearchItems = lstmeetups.map(item => {
+          return item[fieldType] || '';
         });
-      }
 
-      resolve([...new Set(lstSearchItems)]);
+        if (input) {
+          lstSearchItems = lstSearchItems.filter(item => {
+            return typeof item == 'string' && item.indexOf(input) != -1;
+          });
+        }
+
+        resolve([...new Set(lstSearchItems)]);
+      } catch (err) {
+        reject(err);
+      }
     });
   };
 };
@@ -47,10 +51,14 @@ publishMeetup = newMeetup => {
     generatemarkdown();
     status.stop();
     console.log(
-      chalk.green('Markdown Files generated.Please review and commit.')
+      chalk.green('Markdown Files generated.Please review changes and commit.')
     );
   } catch (err) {
-    console.log(err);
+    console.log(
+      chalk.red(
+        'Oops..Something went wrong while publishing data.Create a Issue explaining your test case.'
+      )
+    );
   }
 };
 

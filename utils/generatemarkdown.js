@@ -3,32 +3,20 @@ var fs = require('fs');
 var allmeetups = require('./../db/meetup.json');
 
 generateMarkdown = () => {
-  var cities = [];
-  for (i = 0; i < allmeetups.length; i++) {
-    if (cities[allmeetups[i].city]) {
-      cities[allmeetups[i].city].push(allmeetups[i]);
-    } else {
-      cities[allmeetups[i].city] = [];
-      cities[allmeetups[i].city].push(allmeetups[i]);
-    }
-  }
+  var groupBycities = allmeetups.reduce((result, meetup) => {
+    result[meetup.city] = (result[meetup.city] || []).concat(meetup);
+    return result;
+  }, []);
 
-  let finalSet = {};
-  for (let city in cities) {
-    let meetup_city = [...cities[city]];
-    var meetups = {};
-    for (i = 0; i < meetup_city.length; i++) {
-      if (meetups[meetup_city[i].meetup]) {
-        meetups[meetup_city[i].meetup].push(meetup_city[i]);
-      } else {
-        meetups[meetup_city[i].meetup] = [];
-        meetups[meetup_city[i].meetup].push(meetup_city[i]);
-      }
-    }
-    finalSet[city] = meetups;
+  for (let city in groupBycities) {
+    groupBycities[city] = groupBycities[city].reduce((result, cityitem) => {
+      result[cityitem.meetup] = (result[cityitem.meetup] || []).concat(
+        cityitem
+      );
+      return result;
+    }, {});
   }
-
-  generateFolders(finalSet);
+  generateFolders(groupBycities);
 };
 
 generateFolders = lstMeetups => {
@@ -72,4 +60,5 @@ makeDirectory = path => {
   }
 };
 
+generateMarkdown();
 module.exports = generateMarkdown;
